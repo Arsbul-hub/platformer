@@ -1,6 +1,6 @@
 import keyboard
 from pygame import *
-
+import time
 class App():
     def __init__(self):
         self.l =  [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -40,6 +40,7 @@ class App():
         while True:
             self.update()
     def update(self):
+        time.sleep(1/10)
         self.sc.fill((0,0,0))
         for e in event.get(): # Обрабатываем события
             if e.type == QUIT:
@@ -54,14 +55,13 @@ class App():
             print(int(self.y/50)+6 ,int(self.x/50)+6, "item: ",self.l[int(self.y/50)+6 ][int(self.x/50)+6])
         except:
             pass
-        if keyboard.is_pressed("s") and self.l[int(self.y/50)+6 ][int(self.x/50)+6] != 1:
-            self.y += 1
-
-        elif keyboard.is_pressed("w") and self.l[int(self.y/50)+6 ][int(self.x/50)+6] != 1:
-            self.y -= 1
-        elif keyboard.is_pressed("d") and self.l[int(self.y/50)+6 ][int(self.x/50)+6] != 1:
-            self.x += 1
-        elif keyboard.is_pressed("a") and self.l[int(self.y/50)+6 ][int(self.x/50)+6] != 1:
-            self.x -= 1
+        if keyboard.is_pressed("s") and self.l[int(self.y/50)+7 ][int(self.x/50)+6] != 1:
+            self.y += 50
+        elif keyboard.is_pressed("w") and self.l[int(self.y/50)+5 ][int(self.x/50)+6] != 1:
+            self.y -= 50
+        elif keyboard.is_pressed("d") and self.l[int(self.y/50)+6 ][int(self.x/50)+7] != 1:
+            self.x += 50
+        elif keyboard.is_pressed("a") and self.l[int(self.y/50)+6 ][int(self.x/50)+5] != 1:
+            self.x -= 50
         display.update()
 App()
