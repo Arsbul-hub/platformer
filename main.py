@@ -61,7 +61,7 @@ class App():
         try:
             draw.rect(self.sc, (0, 255, 0), (300 ,300, 50, 50))
             #draw.rect(self.sc, (0, 255, 0), (int(self.y/50)*50+6*50, int(self.x/50)+6 , 50, 50))
-            print(int(self.y/50)+6 ,int(self.x/50)+6, "item1: ",self.l[int((self.y+1)/50)+6 ][int(self.x/50)+6],"item2: ",self.l[int((self.y+1)/50)+6 ][int((self.x+49)/50)+6])
+            print(int(self.y/50)+6 ,int(self.x/50)+6, "item1: ",self.l[int((self.y)/50)+6 ][int((self.x)/50)+7],"item2: ",self.l[int((self.y-49)/50)+6 ][int((self.x)/50)+7])
             #self.l[int((self.y) / 50) + 6][int(self.x / 50) + 6] = 9
             #print(self.l)
             #for i in self.l:
@@ -70,11 +70,11 @@ class App():
             pass
         if keyboard.is_pressed("s") and self.l[int((self.y+1)/50)+6 ][int(self.x/50)+6]!= 1 and self.l[int((self.y+1)/50)+6 ][int((self.x+49)/50)+6]!=1:
             self.y += 1
-        elif keyboard.is_pressed("w") and (self.l[int(self.y/50)+6 ][int(self.x/50)+6] != 1 and self.l[int(self.y/50)+5 ][int((self.x+49)/50)+6]!= 1):
+        elif keyboard.is_pressed("w") and self.l[int((self.y)/50)+5 ][int((self.x+1)/50)+6] != 1 and self.l[int((self.y-49)/50)+6 ][int((self.x+49)/50)+6] != 1:
             self.y -= 1
-        elif keyboard.is_pressed("d"):
+        elif keyboard.is_pressed("d") and self.l[int((self.y)/50)+6 ][int((self.x)/50)+7]!=1  and self.l[int((self.y-49)/50)+6 ][int((self.x)/50)+7]!= 1:
             self.x += 1
-        elif keyboard.is_pressed("a"):
+        elif keyboard.is_pressed("a") and self.l[int((self.y-1)/50)+6 ][int((self.x)/50)+5] !=1 and self.l[int((self.y)/50)+5 ][int((self.x)/50)+5] != 1:
             self.x -= 1
         display.update()
 App()
