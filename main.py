@@ -1,7 +1,7 @@
 import keyboard
 from pygame import *
 import time
-import collider
+from button import *
 class App():
     def __init__(self):
 
@@ -43,19 +43,33 @@ class App():
         self.x = 0
         self.colliders = []
         self.size = (100,100)
+        self.test = Button(self.sc,path="1.png",pos=(100,100),command=self.tt)
         while True:
-            self.update()
+            #print(event.get())
 
+
+
+            self.update()
+            display.update()
+
+    def tt(self):
+        print(123)
     def update(self):
-        time.sleep(1/100)
+        #time.sleep(1/100)
         self.sc.fill((0,0,0))
-        for e in event.get(): # Обрабатываем события
+
+        for i in range(30):
+                for j in range(30):
+                    if self.l[i][j] == 1:
+                        draw.rect(self.sc, (255, 255, 255),
+                                  (j * self.size[0] - self.x, i * self.size[1] - self.y, self.size[0], self.size[1]))
+            #display.update()
+        for e in event.get():  # Обрабатываем события
             if e.type == QUIT:
                 quit()
-        for i in range(30):
-            for j in range(30):
-                if self.l[i][j] == 1:
-                    draw.rect(self.sc, (255, 255, 255),(j*self.size[0]-self.x,i*self.size[1]-self.y,self.size[0],self.size[1]))
+            #self.test.update_show()
+            self.test.update(e)
+        self.test.update_show()
 
         #print(int(self.x/50)+6*50)
 
@@ -63,22 +77,26 @@ class App():
 
         try:
             draw.rect(self.sc, (0, 255, 0), (350 ,350, self.size[0], self.size[1]))
-            #draw.rect(self.sc, (0, 255, 0), (int(self.y/50)*50+7*50, int(self.x/50)*50+7*50 , 50, 50))
-            #print(int((self.y)/50)+7,int((self.x)/50)+7, "item1: ",self.l[int((self.y+350)/50) ][int((self.x+349)/50)],self.l[int((self.y+399)/50) ][int((self.x+349)/50)])
-            #self.l[int((self.y) / 50) + 6][int(self.x / 50) + 6] = 9
-            #print(self.l)
-            #for i in self.l:
-            #    print(i,"\n")aaaaaaaaa
+            if keyboard.is_pressed("s") and self.l[int((self.y + 350 + self.size[1]) / self.size[1])][
+                int((self.x + 350) / self.size[0])] != 1 and self.l[int((self.y + 350 + self.size[1]) / self.size[1])][
+                int((self.x + 349 + self.size[0]) / self.size[0])] != 1:
+                self.y += 1
+            if keyboard.is_pressed("w") and self.l[int((self.y + 349) / self.size[1])][
+                int((self.x + 350) / self.size[0])] != 1 and self.l[int((self.y + 349) / self.size[1])][
+                int((self.x + 349 + self.size[1]) / self.size[0])] != 1:
+                self.y -= 1
+            if keyboard.is_pressed("d") and self.l[int((self.y + 350) / self.size[1])][
+                int((self.x + 350 + self.size[0]) / self.size[0])] != 1 and \
+                    self.l[int((self.y + 349 + self.size[1]) / self.size[1])][
+                        int((self.x + 350 + self.size[0]) / self.size[0])] != 1:
+                self.x += 1
+            if keyboard.is_pressed("a") and self.l[int((self.y + 350) / self.size[1])][
+                int((self.x + 349) / self.size[1])] != 1 and self.l[int((self.y + 349 + self.size[1]) / self.size[1])][
+                int((self.x + 349) / self.size[0])] != 1:
+                self.x -= 1
         except:
-            print("error")
-        print(self.x,self.y)
-        if keyboard.is_pressed("s") and self.l[int((self.y+350+self.size[1])/self.size[1]) ][int((self.x+350)/self.size[0])] != 1 and self.l[int((self.y+350+self.size[1])/self.size[1]) ][int((self.x+349+self.size[0])/self.size[0])] != 1:
-            self.y += 1
-        if keyboard.is_pressed("w") and self.l[int((self.y+349)/self.size[1]) ][int((self.x+350)/self.size[0])] != 1 and self.l[int((self.y+349)/self.size[1]) ][int((self.x+349+self.size[1])/self.size[0])] != 1:
-            self.y -=1
-        if keyboard.is_pressed("d") and self.l[int((self.y+350)/self.size[1]) ][int((self.x+350+self.size[0])/self.size[0])] != 1 and self.l[int((self.y+349+self.size[1])/self.size[1]) ][int((self.x+350+self.size[0])/self.size[0])] !=1:
-            self.x += 1
-        if keyboard.is_pressed("a") and self.l[int((self.y+350)/self.size[1]) ][int((self.x+349)/self.size[1])] != 1 and self.l[int((self.y+349+self.size[1])/self.size[1]) ][int((self.x+349)/self.size[0])] != 1:
-            self.x -= 1
-        display.update()
+            pass
+
+
+
 App()
